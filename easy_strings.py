@@ -19,7 +19,7 @@ dvorak_chars = [ [ [ [ 'b', 'm', 'w', 'v', 'z']
                    ]
                   ,[ [ 'X', 'K', 'J', 'Q', ':']
                     ,[ 'I', 'U', 'E', 'O', 'A']
-                    ,[ 'Y', 'P', '>', '<', '~']
+                    ,[ 'Y', 'P', '>', '<', '~'] # replacing quote marks because they seem dangerous
                     ,[ '%', '$', '#', '@', '!']
                    ]
                  ]
@@ -57,9 +57,10 @@ def easy_string( nchars, char_grid = dvorak_chars ):
                 hands.append(1-hands[i-1])
             else:
                 hands.append(hands[i-1])
-    
-    return {'rows': rows, 'cols': cols, 'shifts': shifts, 'hands': hands}
 
-def test(dd):
-    print(dd['shifts'])
-    print(dd['hands'])
+    # assemble the string
+    ezs = ''
+    for s, h, r, c in zip(shifts, hands, rows, cols):
+        ezs += char_grid[s][h][r][c]
+
+    return ezs
