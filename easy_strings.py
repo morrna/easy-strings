@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import random as rnd
 
 # chars[shift][hand][row][column]
@@ -24,6 +25,7 @@ dvorak_chars = [ [ [ [ 'b', 'm', 'w', 'v', 'z']
                    ]
                  ]
                ]
+
 
 def easy_string( nchars, char_grid = dvorak_chars ):
     """
@@ -64,3 +66,18 @@ def easy_string( nchars, char_grid = dvorak_chars ):
         ezs += char_grid[s][h][r][c]
 
     return ezs
+
+
+if __name__=="__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate easily typed strings")
+
+    parser.add_argument("-n", default=1, type=int, \
+                        help = "Number of strings to generate (default 1)")
+    
+    args = parser.parse_args()
+
+    for i in range(args.n):
+        print(easy_string(12))
+
