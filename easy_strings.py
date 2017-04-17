@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 import random as rnd
 
+char_mats = {}
+
 # chars[shift][hand][row][column]
-dvorak_chars = [ [ [ [ 'b', 'm', 'w', 'v', 'z']
+char_mats['dvorak_chars'] = [ [ [ [ 'b', 'm', 'w', 'v', 'z']
                     ,[ 'd', 'h', 't', 'n', 's']
                     ,[ 'f', 'g', 'c', 'r', 'l']
                     ,[ '6', '7', '8', '9', '0']
@@ -26,7 +28,7 @@ dvorak_chars = [ [ [ [ 'b', 'm', 'w', 'v', 'z']
                  ]
                ]
 
-qwerty_chars = [ [ [ [ 'n', 'm', ',', '.', '/']
+char_mats['qwerty_chars'] = [ [ [ [ 'n', 'm', ',', '.', '/']
                     ,[ 'h', 'j', 'k', 'l', ';']
                     ,[ 'y', 'u', 'i', 'o', 'p']
                     ,[ '6', '7', '8', '9', '0']
@@ -51,7 +53,7 @@ qwerty_chars = [ [ [ [ 'n', 'm', ',', '.', '/']
                ]
 
 
-def easy_string( nchars, char_grid = dvorak_chars ):
+def easy_string( nchars, char_grid = char_mats['dvorak_chars'] ):
     """
     randomly generate a string of length nchars which is easy to type
     """
@@ -95,13 +97,21 @@ def easy_string( nchars, char_grid = dvorak_chars ):
 if __name__=="__main__":
     import argparse
 
+    default_charset = 'dvorak_chars'
+
     parser = argparse.ArgumentParser(description="Generate easily typed strings")
 
     parser.add_argument("-n", default=1, type=int, \
                         help = "Number of strings to generate (default 1)")
+    parser.add_argument('-q', '--qwerty', dest='charset', action='store_const', \
+                        const='qwerty_chars', default=default_charset, \
+                        help = "Base the password on the QWERTY keyboard layout")
+    parser.add_argument('-d', '--dvorak', dest='charset', action='store_const', \
+                        const='dvorak_chars', default=default_charset, \
+                        help = "Base the password on the QWERTY keyboard layout")
     
     args = parser.parse_args()
 
     for i in range(args.n):
-        print(easy_string(12))
+        print(easy_string(12, char_grid=char_mats[args.charset] ))
 
