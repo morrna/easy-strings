@@ -108,7 +108,7 @@ if __name__=="__main__":
                         help = "Base the password on the QWERTY keyboard layout")
     parser.add_argument('-d', '--dvorak', dest='charset', action='store_const', \
                         const='dvorak_chars', default=default_charset, \
-                        help = "Base the password on the QWERTY keyboard layout")
+                        help = "Base the password on the Dvorak keyboard layout")
     
     args = parser.parse_args()
 
