@@ -103,6 +103,8 @@ if __name__=="__main__":
 
     parser.add_argument("-n", default=1, type=int, \
                         help = "Number of strings to generate (default 1)")
+    parser.add_argument("-l", default=12, type=int, \
+                        help = "Length of generated strings (default 12)")
     parser.add_argument('-q', '--qwerty', dest='charset', action='store_const', \
                         const='qwerty_chars', default=default_charset, \
                         help = "Base the password on the QWERTY keyboard layout")
@@ -113,5 +115,5 @@ if __name__=="__main__":
     args = parser.parse_args()
 
     for i in range(args.n):
-        print(easy_string(12, char_grid=char_mats[args.charset] ))
+        print(easy_string(args.l, char_grid=char_mats[args.charset] ))
 
